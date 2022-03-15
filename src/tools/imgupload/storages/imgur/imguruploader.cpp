@@ -70,7 +70,7 @@ void ImgurUploader::upload()
     QString description = FileNameHandler().parsedPattern();
     urlQuery.addQueryItem(QStringLiteral("description"), description);
 
-    QUrl url(QStringLiteral("https://ghostzero.dev/api/files/imgur"));
+    QUrl url(QStringLiteral("https://api.maid.sh/v1/files/imgur"));
     url.setQuery(urlQuery);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -87,7 +87,7 @@ void ImgurUploader::deleteImage(const QString& fileName,
 {
     Q_UNUSED(fileName)
     bool successful = QDesktopServices::openUrl(
-      QUrl(QStringLiteral("https://ghostzero.dev/api/files/%1").arg(deleteToken)));
+      QUrl(QStringLiteral("https://api.maid.sh/v1/files/%1/delete").arg(deleteToken)));
     if (!successful) {
         notification()->showMessage(tr("Unable to open the URL."));
     }
